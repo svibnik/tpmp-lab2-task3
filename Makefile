@@ -3,6 +3,7 @@ CFLAGS = -Wall -Wextra -Iinclude -std=c99
 TARGET = bin/student_program
 SRCDIR = src
 OBJDIR = obj
+BINDIR = bin
 SOURCES = $(wildcard $(SRCDIR)/*.c)
 OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
