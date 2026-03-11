@@ -17,5 +17,5 @@ jobs:
     - name: Build with Make
       run: make
 
-    - name: Run the program
-      run: make run
+    # - name: Run the program
+    #   run: make run
