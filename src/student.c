@@ -3,16 +3,16 @@
 #include "student.h"
 
 void input_students(STUDENT students[], int *count) {
-    printf("Введите количество студентов (макс. %d): ", MAX_STUDENTS);
+    printf("Enter number of students (max %d): ", MAX_STUDENTS);
     scanf("%d", count);
     if (*count > MAX_STUDENTS) *count = MAX_STUDENTS;
     for (int i = 0; i < *count; i++) {
-        printf("\nСтудент #%d:\n", i + 1);
-        printf("  Фамилия и инициалы: ");
+        printf("\nStudent #%d:\n", i + 1);
+        printf("  Last name and initials: ");
         scanf(" %[^\n]", students[i].lastname);
-        printf("  Номер группы: ");
+        printf("  Group number: ");
         scanf("%s", students[i].group);
-        printf("  Введите %d оценки (через пробел): ", MARKS_COUNT);
+        printf("  Enter %d grades (space-separated): ", MARKS_COUNT);
         for (int j = 0; j < MARKS_COUNT; j++) {
             scanf("%d", &students[i].marks[j]);
         }
@@ -43,7 +43,7 @@ void sort_by_average(STUDENT students[], int count) {
 
 void print_excellent(STUDENT students[], int count) {
     int found = 0;
-    printf("\nСтуденты с оценками только 4 и 5:\n");
+    printf("\nStudents with grades 4 and 5 only:\n");
     for (int i = 0; i < count; i++) {
         int is_excellent = 1;
         for (int j = 0; j < MARKS_COUNT; j++) {
@@ -53,12 +53,12 @@ void print_excellent(STUDENT students[], int count) {
             }
         }
         if (is_excellent) {
-            printf("  %s (группа %s), ср.балл: %.2f\n",
-                students[i].lastname, students[i].group, students[i].average);
+            printf("  %s (group %s), avg: %.2f\n", 
+                   students[i].lastname, students[i].group, students[i].average);
             found = 1;
         }
     }
-    if (!found) printf("  Таких студентов нет.\n");
+    if (!found) printf("  No such students.\n");
 }
 
 void remove_min_average(STUDENT students[], int *count) {
@@ -69,7 +69,7 @@ void remove_min_average(STUDENT students[], int *count) {
             min_idx = i;
         }
     }
-    printf("\nУдаляем студента: %s (ср.балл %.2f)\n",
+    printf("\nRemoving student: %s (avg %.2f)\n",
            students[min_idx].lastname, students[min_idx].average);
     for (int i = min_idx; i < *count - 1; i++) {
         students[i] = students[i + 1];
@@ -78,11 +78,11 @@ void remove_min_average(STUDENT students[], int *count) {
 }
 
 void print_all_students(STUDENT students[], int count) {
-    printf("\n%-5s %-20s %-8s %-15s\n", "№", "Фамилия",
-	"Группа", "Средний балл");
+    printf("\n%-5s %-20s %-8s %-15s\n", "No", "Lastname", "Group", "Average");
+    printf("------------------------------------------------\n");
     for (int i = 0; i < count; i++) {
         printf("%-5d %-20s %-8s %-15.2f\n",
                i + 1, students[i].lastname, students[i].group,
-	       students[i].average);
+		students[i].average);
     }
 }
